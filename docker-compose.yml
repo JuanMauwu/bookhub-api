@@ -1,0 +1,44 @@
+secrets:
+  CREDS:
+    file: credentials
+
+networks:
+  djangonet:
+  
+    # driver: overlay
+
+services:
+  postgres:
+      container_name: postgres
+      restart: always
+      image: postgis/postgis:15-master
+      environment:
+        - POSTGRES_DB=${POSTGRESQL_DATABASE:-postgres}
+        - POSTGRES_USER=${POSTGRESQL_USERNAME:-postgres}
+        - POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD:-postgres}
+      volumes:
+        - ../djangoData/database:/var/lib/postgresql/data
+      ports:
+        - 5432:5432
+      networks:
+        - djangonet
+  
+  backend:
+      container_name: backend
+      #platform: linux/arm64/v8
+      build:
+        context: ./bac
+        dockerfile: Dockerfile
+      image: djangoproject/backend:latest
+      #command: bash -c "./run_djangoapi.sh"
+      volumes:
+        - ./backend:/usr/src/app
+        - ../djangoData/staticfiles:/usr/src/app/data/staticfiles
+        - ../djangoData/mediafiles:/usr/src/app/data/mediafiles
+      secrets:
+        - CREDS
+      ports:
+          - 8000:8000
+          - 5678:5678
+      networks:
+        - djangonet
