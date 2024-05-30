@@ -27,7 +27,7 @@ services:
       container_name: backend
       #platform: linux/arm64/v8
       build:
-        context: ./bac
+        context: ./backend
         dockerfile: Dockerfile
       image: djangoproject/backend:latest
       #command: bash -c "./run_djangoapi.sh"

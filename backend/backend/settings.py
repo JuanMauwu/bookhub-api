@@ -11,21 +11,32 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.utils.translation import gettext_lazy as _
+
+with open("/run/secrets/CREDS") as f:
+    import json
+
+    creds = json.load(f)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0=14vx%2xu05lh!khheg89%0l*g&bw*u!+&spuplg4ltp1%m1p'
+SECRET_KEY = creds["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [   
+    "*",
+    "0.0.0.0",
+    "localhost",
+    "127.0.0.1",]
 
 
 # Application definition
@@ -37,6 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework",
+    "rest_framework_gis",
+    'myapp'
 ]
 
 MIDDLEWARE = [
@@ -74,9 +88,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": creds["POSTGRES_DB"],
+        "USER": creds["POSTGRES_USER"],
+        "PASSWORD": creds["POSTGRES_PASSWORD"],
+        "HOST": creds["POSTGRES_HOST"],
+        "PORT": creds["POSTGRES_PORT"],
+        "TEST": {
+            "MIRROR": "default",
+        },
     }
 }
 
