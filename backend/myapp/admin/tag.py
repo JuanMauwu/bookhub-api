@@ -6,9 +6,10 @@ class TagAdmin(admin.ModelAdmin):
     icon_name = "icons/imagenes"
     fields = (
         ("name"),
+        ("active")
     )
     
-    list_display = ["name"]
+    list_display = ["name", "active"]
     list_display_link = ["name"]
     search_fields = ["name"]
     list_filter = ["name"]

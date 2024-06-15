@@ -12,6 +12,6 @@ class BookAdmin(admin.ModelAdmin):
         ("active"),
     )
     list_display = ["title", "author", "summary", "pos_date", "active"]
-    list_display_link = ["title", "author", "summary", "pos_date", "active"]
-    search_fields = ["title"]
-    list_filter = ["title"]
+    list_display_links = ["title", "author"]
+    search_fields = ["title", "author", "summary"]
+    list_filter = ["active"]
