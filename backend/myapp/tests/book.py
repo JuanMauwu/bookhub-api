@@ -1,6 +1,6 @@
-from django.test import TestCase
-from rest_framework import status
-from django.urls import reverse
+from django.test import TestCase # type: ignore
+from rest_framework import status # type: ignore
+from django.urls import reverse # type: ignore
 #from django.test.client import encode_multipart
 #from django.conf import settings as _settings
 

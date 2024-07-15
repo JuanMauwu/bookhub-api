@@ -1,15 +1,23 @@
-from django.urls import path
+from django.urls import path, include # type: ignore
+from rest_framework import routers # type: ignore
 from myapp import views
+from .views import BookViewSet, DetailReviewViewSet, LabelViewSet, ReviewViewSet, TagViewSet
 
-app_name = "myapp"
+router = routers.DefaultRouter()
+
+router.register(r"books",BookViewSet)
+router.register(r"details_reviews",DetailReviewViewSet)
+router.register(r"labels",LabelViewSet)
+router.register(r"reviews",ReviewViewSet)
+router.register(r"tags",TagViewSet)
+
 
 urlpatterns = [
-    path(
-        "books",
-        views.BookListAPIView.as_view(),
-        name="book-list",
-    ),
-    
+    path('', include(router.urls)),
+]
+
+
+"""
     path(
         "tags",
         views.TagListAPIView.as_view(),
@@ -22,15 +30,15 @@ urlpatterns = [
         name="label-list"
     ),
     
-     path(
+    path(
         "details_reviews",
         views.DetailReviewListAPIView.as_view(),
         name="detail_review-list"
     ),
      
-     path(
+    path(
         "reviews",
         views.ReviewListAPIView.as_view(),
         name="review-list"
     ),
-]
+    """

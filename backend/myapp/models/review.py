@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models # type: ignore
 from myapp.models import Book, Label, DetailReview
 
 class Review(models.Model):
