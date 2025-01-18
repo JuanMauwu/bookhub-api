@@ -3,14 +3,10 @@ from rest_framework import serializers
 from myapp.models import Book
 
 class BookSerializer(serializers.ModelSerializer):
-    #id = serializers.SerializerMethodField(read_only=True)
-
-    #def get_id(self, obj):
-        #return obj.fecha
 
     class Meta:
         model = Book
-        fields = [
+        fields = [   # Campos que deseo incluir para serializar
             "id",
             "title",
             "author",

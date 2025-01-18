@@ -17,3 +17,4 @@ class ReviewAdmin(admin.ModelAdmin):
     list_display_links = ["book"]
     search_fields = ["reviewer"]
     list_filter = ["book"]
+    filter_horizontal = ["labels"]

@@ -10,7 +10,7 @@ class DetailReviewAdmin(admin.ModelAdmin):
         ("comments"),
         ("active")
     )
-    list_display = ["pos_date", "qualification", "comments", "active"]
+    list_display = ["id", "pos_date", "qualification", "comments", "active"]
     list_display_links = ["pos_date", "comments"]
     search_fields = ["pos_date"]
     list_filter = ["active"] 

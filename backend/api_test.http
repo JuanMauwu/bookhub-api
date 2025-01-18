@@ -1,0 +1,138 @@
+@localhost=localhost
+@port = 8000
+@host = http://{{localhost}}:{{port}}
+@contentType = application/json
+
+
+#                               METODO GET
+GET {{host}}/api/v1/books/
+
+###
+
+GET {{host}}/api/v1/detail_reviews/
+
+###
+
+GET {{host}}/api/v1/labels/
+
+###
+
+GET {{host}}/api/v1/publishers
+
+###
+
+GET {{host}}/api/v1/reviews
+
+###
+
+GET {{host}}/api/v1/tags
+
+###
+
+
+
+#                               METODO POST
+POST {{host}}/api/v1/books/
+Content-Type: {{contentType}}
+
+{
+    "title": "fff",
+    "author": "Carlitos",
+    "summary": "ooo",
+    "pos_date": "2023-10-26",
+    "active": true
+}
+
+###
+
+POST {{host}}/api/v1/detail_reviews/
+Content-Type: {{contentType}}
+
+{
+  "pos_date": "2005-06-12",
+  "qualification": 3,
+  "comments": "bvbvbv",
+  "active": true
+}
+
+###
+
+POST {{host}}/api/v1/labels/
+Content-Type: {{contentType}}
+
+ {
+    "name": "name",
+    "description": "dddddddddddddd",
+    "active": true
+}
+
+###
+
+
+
+#                               METODO PUT
+PUT {{host}}/api/v1/detail_review/6/
+Content-Type: {{contentType}}
+
+{
+    "id": 1,
+    "pos_date": "2025-01-03",
+    "qualification": 10,
+    "comments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam congue vehicula purus, in sollicitudin dui accumsan id.",
+    "active": true
+}
+
+###
+
+PUT {{host}}/api/v1/detail_review/1/
+Content-Type: {{contentType}}
+
+{
+    "id": 4,
+    "pos_date": "2005-06-12",
+    "qualification": 1,
+    "comments": "update",
+    "active": true
+}
+
+###
+
+
+
+#                               METODO PATCH
+PATCH {{host}}/api/v1/book/2/
+Content-Type: {{contentType}}
+
+{
+    "title": "la",
+    "author": "Eduardo Barrios",
+    "pos_date": "2024-10-10"
+}
+  
+###
+
+
+
+
+#                               METODO DELETE
+DELETE  {{host}}/api/v1/book/7/
+
+###
+
+DELETE  {{host}}/api/v1/detail_review/?/
+
+###
+
+DELETE  {{host}}/api/v1/label/?/
+
+###
+
+DELETE  {{host}}/api/v1/publisher/?/
+
+###
+
+DELETE  {{host}}/api/v1/review/?/
+
+###
+
+DELETE  {{host}}/api/v1/tag/?/

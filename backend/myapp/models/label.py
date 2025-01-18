@@ -11,6 +11,6 @@ class Label(models.Model):
     class Meta:
             app_label = "myapp"
             db_table = "label"
-            #ordering = ["pos_date"]
+            ordering = ["id"]
             verbose_name = "Label"
             verbose_name_plural = "Labels"

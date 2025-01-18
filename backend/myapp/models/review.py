@@ -1,8 +1,8 @@
-from django.db import models # type: ignore
+from django.db import models
 from myapp.models import Book, Label, DetailReview
 
 class Review(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE) #on_delete, que se hace cuendo se eleimina un objeto relacionado
     reviewer = models.CharField(max_length=100)
     text = models.TextField()
     labels = models.ManyToManyField(Label)

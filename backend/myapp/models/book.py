@@ -1,19 +1,19 @@
-from django.db import models # type: ignore
+from django.db import models
 
 class Book(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=100, verbose_name="Book author")
+    title = models.CharField(max_length=30, unique=True)
+    author = models.CharField("Book author", max_length=100)
     summary = models.TextField(max_length=500, blank=True)
     pos_date = models.DateField()
     active = models.BooleanField(default=True)
     
 
-    def __str__(self):
+    def __str__(self):    #metodo str para saber como representar una instancia de este modelo en las interfaces
         return self.title
     
     class Meta:
-            app_label = "myapp"
-            db_table = "book"
-            ordering = ["pos_date"]
-            verbose_name = "Book"
-            verbose_name_plural = "Books"
+        app_label = "myapp"     # Nombre de la aplicación
+        db_table = "book"       # Nombre de la tabla en la base de datos
+        ordering = ["id"]       # Como se ordenara en el admin
+        verbose_name = "Book"   # Nombre legible singular
+        verbose_name_plural = "Books"  # Nombre legible plural

@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='review',
             name='active',
-            field=models.CharField(default=True),
+            field=models.BooleanField(default=True),
         ),
     ]
