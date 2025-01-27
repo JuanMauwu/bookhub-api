@@ -14,19 +14,6 @@ class BookViewSet(viewsets.ModelViewSet):
 class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.filter(active=True)
     serializer_class = BookSerializer
-    """
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({"values": serializer.data})
-    
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    """
 
 class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()

@@ -4,8 +4,6 @@ from myapp import views
 
 app_name = "myapp"
 
-router = routers.DefaultRouter()
-
 urlpatterns = [
 
     #book
@@ -32,4 +30,4 @@ urlpatterns = [
     path('tags/', views.TagListCreateAPIView.as_view(), name='tag-list-create'),
     path("tag/<str:id>/", views.TagDetailAPIView.as_view(), name="tag-detail"),
     
-]
+] 

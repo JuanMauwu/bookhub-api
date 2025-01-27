@@ -100,7 +100,7 @@ Content-Type: {{contentType}}
 
 
 #                               METODO PATCH
-PATCH {{host}}/api/v1/book/2/
+PATCH {{host}}/api/v1/book/3/
 Content-Type: {{contentType}}
 
 {

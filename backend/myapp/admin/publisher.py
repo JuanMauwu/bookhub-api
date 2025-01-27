@@ -17,6 +17,7 @@ class PublisherAdmin(admin.ModelAdmin):
     )
     
     list_display = [
+        "id",
         "name", 
         "founded", 
         "website",

@@ -37,6 +37,16 @@ class DetailReviewGetAPITest(TestCase):
         for field in expected_fields:
             self.assertEqual(data[0][field], getattr(self.detail_review1, field))
         
+        #verificar en db
+        expected_fields = ["id", "pos_date", "qualification", "comments", "active"]
+        
+        detail_review = DetailReview.objects.get(id=self.detail_review1.id)
+        for field in expected_fields:
+            if field == "pos_date":
+                self.assertEqual(str(getattr(detail_review, field)), getattr(self.detail_review1, field))
+            else:
+                self.assertEqual(getattr(detail_review, field), getattr(self.detail_review1, field))
+        
     def test_field_types(self):
         data = self.response.json()
         
@@ -78,14 +88,23 @@ class DetailReviewGetDetailAPITest(TestCase):
         for field in expected_fields:
             self.assertIn(field, data)
         
-        #verificar que los valores
+        #verificar que los datos de la respuesta correspodan con el objeto creado para la prueba
         for field in expected_fields:
             self.assertEqual(data[field], getattr(self.detail_review1, field))
+    
+        #verificar en db
+        expected_fields = ["id", "pos_date", "qualification", "comments", "active"]
+        
+        detail_review = DetailReview.objects.get(id=self.detail_review1.id)
+        for field in expected_fields:
+            if field == "pos_date":
+                self.assertEqual(str(getattr(detail_review, field)), getattr(self.detail_review1, field))
+            else:
+                self.assertEqual(getattr(detail_review, field), getattr(self.detail_review1, field))
     
     def test_field_types(self):
         data = self.response.json()
         
-        #verificar que los tipos de campos de la respuesta sean los esperados
         expected_types = {
             "id":int,
             "pos_date":str,
@@ -94,6 +113,7 @@ class DetailReviewGetDetailAPITest(TestCase):
             "active":bool,
         }
         
+        #verificar que los tipos de campos de la respuesta sean los esperados
         for field, type in expected_types.items():
             self.assertIsInstance(data[field], type)
 
@@ -141,7 +161,6 @@ class DetailReviewPostAPITest(TestCase):
     def test_fields_types(self):
         data = self.response.json()
         
-        #verificar que los tipos de campos de la respuesta sean los esperados
         fields_types = {
             "id": int,
             "pos_date": str,
@@ -150,6 +169,7 @@ class DetailReviewPostAPITest(TestCase):
             "active": bool            
         }
         
+        #verificar que los tipos de campos de la respuesta sean los esperados
         for field, type in fields_types.items():
             self.assertIsInstance(data[field], type)
       
@@ -225,7 +245,6 @@ class DetailReviewPutAPITest(TestCase):
     def test_fields_types(self):
         data = self.response.json()
         
-        #verificar que los tipos de campos de la respuesta sean los esperados
         fields_types = {
             "id": int,
             "pos_date": str,
@@ -234,12 +253,12 @@ class DetailReviewPutAPITest(TestCase):
             "active": bool            
         }
         
+        #verificar que los tipos de campos de la respuesta sean los esperados
         for field, type in fields_types.items():
             self.assertIsInstance(data[field], type)
 
 #TEST METODO PATCH (actualizar pero solo se pasa el campo a modificar, puede variar dado como esten definidos los campos en el modelo)
 class DetailReviewPatchAPITest(TestCase):
-    
     def setUp(self):
         self.detai_review1 = DetailReview.objects.create(
             pos_date = "2005-05-29",
@@ -287,7 +306,6 @@ class DetailReviewPatchAPITest(TestCase):
     def test_field_types(self):
         data = self.response.json()
         
-        #verificar que los tipos de campos de la respuesta sean los esperados
         field_types = {
             "id": int,
             "pos_date": str,
@@ -296,5 +314,6 @@ class DetailReviewPatchAPITest(TestCase):
             "active": bool
         }
         
+        #verificar que los tipos de campos de la respuesta sean los esperados
         for field, type in field_types.items():
             self.assertIsInstance(data[field], type)

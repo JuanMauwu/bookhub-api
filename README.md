@@ -1,36 +1,42 @@
 # django-benniger
 
 Comandos para iniciar el proyecto:
-
 - Abrir terminal
 - Abrir docker
 - docker compose up backend (inicializa el contenedor)
 
-Abrir sitio administrativo:
 
+Abrir sitio administrativo:
 - http://localhost:8000/admin/
 
-Hacer migraciones:
 
+Hacer migraciones:
 - docker-compose exec backend python manage.py makemigrations myapp
 - docker-compose exec backend python manage.py migrate myapp
 
-Endpoint o rutas de APIs:
 
+Endpoint o rutas de APIs:
 - http://localhost:8000/api/v1/books
 - http://localhost:8000/api/v1/tags
 
+
 Hacer migraciones(despues de crear o modificar un modelo):
-
 - docker compose exec backend python manage.py makemigrations myapp
-
 - docker compose exec backend python manage.py migrate myapp
+
 
 Crear super usuario (inicio de proyecto):
 - docker compose exec backend python manage.py createsuperuser
 
-Tipos de Campos en Django:
 
+Abrir la db en terminal y visualizar tablas:
+- docker-compose exec backend python manage.py dbshell
+- .tables (listar todas las tablas en la db)
+- .mode table (para ponerlo en formato bonito)
+- SELECT column FROM nombre de la tabla (ejem: SELECT title FROM book) (ejem: SELECT * FROM book "selecciona todos los campos")
+
+
+Tipos de Campos en Django:
     Campos Numéricos:
     - IntegerField
     - FloatField
@@ -57,7 +63,7 @@ Tipos de Campos en Django:
     - FileField(upload_to='path/')
     - ImageField(upload_to='path/')
 
-Campos Misceláneos:
+    Campos Misceláneos:
     - EmailField
     - URLField
     - UUIDField
@@ -67,8 +73,8 @@ Campos Misceláneos:
     - GenericIPAddressField(protocol='both')
 
 Comando para el test:
-
 - docker compose exec backend python manage.py test myapp.tests
+
 
 Metodos de asserts (unittest):
 

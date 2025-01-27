@@ -9,7 +9,7 @@ class LabelAdmin(admin.ModelAdmin):
         ("description"),
         ("active")
     )
-    list_display = ["name", "description"]
+    list_display = ["id", "name", "description"]
     list_display_links = ["name", "description"]
     search_fields = ["name"]
     list_filter = ["active"]

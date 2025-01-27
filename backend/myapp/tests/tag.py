@@ -30,9 +30,17 @@ class TagGetAPITest(TestCase):
         for field in expected_fields:
             self.assertIn(field, data[0])
 
-        #verificar que los datos de la respuesta correspodan con el objeto creado para la prueba         
+        #verificar que los datos de la respuesta correspondan con el objeto creado para la prueba         
         for field in expected_fields:
             self.assertEqual(data[0][field], getattr(self.tag1, field))
+            
+        #verificar en db
+        expected_fields = ["id", "name", "active"]
+        
+        tag = Tag.objects.get(id=self.tag1.id)
+        
+        for field in expected_fields:
+            self.assertEqual(getattr(tag, field), getattr(self.tag1, field))
             
     def test_field_types(self):
         data = self.response.json()
@@ -75,6 +83,14 @@ class TagGetDetailAPITest(TestCase):
         #verificar que los valores
         for field in expected_fields:
             self.assertEqual(data[field], getattr(self.tag1, field))
+            
+        #verificar en db
+        expected_fields = ["id", "name", "active"]
+        
+        tag = Tag.objects.get(id=self.tag1.id)
+        
+        for field in expected_fields:
+            self.assertEqual(getattr(tag, field), getattr(self.tag1, field))
             
     def test_field_types(self):
         data = self.response.json()

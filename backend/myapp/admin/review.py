@@ -13,8 +13,8 @@ class ReviewAdmin(admin.ModelAdmin):
         ("active")
     )
     
-    list_display = ["book", "reviewer", "text", "detail", "active"] #dice que label no puede ser utilizado en list_display porque es un campo ManyToManyField
+    list_display = ["id", "book", "reviewer", "text", "detail", "active"] #dice que label no puede ser utilizado en list_display porque es un campo ManyToManyField
     list_display_links = ["book"]
     search_fields = ["reviewer"]
     list_filter = ["book"]
-    filter_horizontal = ["labels"]
+    filter_horizontal = ["labels"] #para que se vea bonito

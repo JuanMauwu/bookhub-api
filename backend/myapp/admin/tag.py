@@ -9,7 +9,7 @@ class TagAdmin(admin.ModelAdmin):
         ("active")
     )
     
-    list_display = ["name", "active"]
+    list_display = ["id", "name", "active"]
     list_display_link = ["name"]
     search_fields = ["name"]
     list_filter = ["name"]
