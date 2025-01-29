@@ -1,6 +1,6 @@
-from rest_framework import generics, status # type: ignore
+from rest_framework import generics, status 
 
-from rest_framework.response import Response # type: ignore
+from rest_framework.response import Response 
 from myapp.models import Publisher
 from myapp.serializers import PublisherSerializer
 

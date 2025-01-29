@@ -1,4 +1,4 @@
-from django.contrib import admin # type: ignore
+from django.contrib import admin
 from myapp import models
 
 @admin.register(models.Review)

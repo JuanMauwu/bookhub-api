@@ -1,5 +1,5 @@
 from django.test import TestCase
-from rest_framework import status # type: ignore
+from rest_framework import status 
 from django.urls import reverse
 from myapp.models import Publisher, Book
 from decimal import Decimal

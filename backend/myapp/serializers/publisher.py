@@ -1,4 +1,4 @@
-from rest_framework import serializers # type: ignore
+from rest_framework import serializers 
 from myapp.models import Publisher
 
 class PublisherSerializer(serializers.ModelSerializer):

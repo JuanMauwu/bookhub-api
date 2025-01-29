@@ -1,5 +1,5 @@
-from django.urls import path, include # type: ignore
-from rest_framework import routers # type: ignore
+from django.urls import path, include 
+from rest_framework import routers 
 from myapp import views
 
 app_name = "myapp"

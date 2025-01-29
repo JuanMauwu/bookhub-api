@@ -1,7 +1,7 @@
-from rest_framework import generics, status # type: ignore
+from rest_framework import generics, status 
 
 # Create your views here.
-from rest_framework.response import Response # type: ignore
+from rest_framework.response import Response 
 from myapp.models import Review
 from myapp.serializers import ReviewSerializer
 

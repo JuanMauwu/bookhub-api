@@ -1,8 +1,8 @@
-from rest_framework import generics, status # type: ignore
+from rest_framework import generics, status 
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
-from rest_framework.response import Response # type: ignore
+from rest_framework.response import Response 
 from myapp.models import DetailReview
 from myapp.serializers import DetailReviewSerializer
 
