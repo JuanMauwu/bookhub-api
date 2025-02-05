@@ -17,6 +17,6 @@ class Publisher(models.Model):
     class Meta:
         app_label = "myapp"      
         db_table = "publisher" 
-        #rdering = ["pos_date"] 
+        ordering = ["id"] 
         verbose_name = "Publisher"   
         verbose_name_plural = "Publishers"

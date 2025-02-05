@@ -10,5 +10,6 @@ class Tag(models.Model):
     class Meta:
             app_label = "myapp"
             db_table = "tag"
+            ordering = ["id"]
             verbose_name = "Tag"
             verbose_name_plural = "Tags"

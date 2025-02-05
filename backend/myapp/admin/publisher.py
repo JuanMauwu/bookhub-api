@@ -11,9 +11,9 @@ class PublisherAdmin(admin.ModelAdmin):
         ("website"),
         ("books"),
         ("address"),
-        ("active"),
         ("email"),
-        ("revenue")
+        ("revenue"),
+        ("active")
     )
     
     list_display = [

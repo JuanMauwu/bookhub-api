@@ -15,6 +15,6 @@ class Review(models.Model):
     class Meta:
         app_label = "myapp"
         db_table = "reviews"
-        #ordering = ["pos_date"]
+        ordering = ["id"]
         verbose_name = "Review"
         verbose_name_plural = "Reviews"

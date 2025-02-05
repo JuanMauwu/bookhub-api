@@ -1,8 +1,14 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class DetailReview(models.Model):
     pos_date = models.DateField()
-    qualification = models.IntegerField(default=1)
+    
+    # atributo choice para limitar las opciones validas em un campo
+    # este debera contener una lista de tuplas (el primer valor de cada tupla es lo que se guarda em db, 
+    # y el segundo la opcion que se muestra en el formulario para llenar)
+    qualification = models.IntegerField(default=1, choices=[(i, str(i)) for i in range(1, 11)], validators=[MinValueValidator(1), MaxValueValidator(10)])
+    
     comments = models.TextField(blank=True)
     active = models.BooleanField(default=True)
     
