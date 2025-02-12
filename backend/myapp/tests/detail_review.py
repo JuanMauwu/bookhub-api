@@ -3,7 +3,6 @@ from rest_framework import status
 from django.urls import reverse
 from myapp.models import DetailReview
 
-
 #TEST GET
 class DetailReviewGetAPITest(TestCase):
     def setUp(self):

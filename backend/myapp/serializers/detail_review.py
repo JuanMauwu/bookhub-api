@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from myapp.models import DetailReview
 
 class DetailReviewSerializer(serializers.ModelSerializer):

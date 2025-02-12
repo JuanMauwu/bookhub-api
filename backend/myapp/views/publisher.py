@@ -4,11 +4,7 @@ from rest_framework.response import Response
 from myapp.models import Publisher
 from myapp.serializers import PublisherSerializer
 
-"""
-class PublisherViewSet(viewsets.ModelViewSet):
-    queryset = Publisher.objects.all()
-    serializer_class = PublisherSerialzer
-"""
+
 class PublisherListCreateAPIView(generics.ListCreateAPIView):
     queryset = Publisher.objects.filter(active=True)
     serializer_class = PublisherSerializer

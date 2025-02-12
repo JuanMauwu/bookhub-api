@@ -18,6 +18,10 @@ urlpatterns = [
     path('labels/', views.LabelListCreateAPIView.as_view(), name='label-list-create'),
     path("label/<str:id>/", views.LabelDetailAPIView.as_view(), name="label-detail"),
     
+    #language
+    path('languages/', views.LanguageListCreateAPIView.as_view(), name='language-list-create'),
+    path("language/<str:id>/", views.LanguageDetailAPIView.as_view(), name="language-detail"),
+    
     #publisher
     path('publishers/', views.PublisherListCreateAPIView.as_view(), name='publisher-list-create'),
     path("publisher/<str:id>/", views.PublisherDetailAPIView.as_view(), name="publisher-detail"),

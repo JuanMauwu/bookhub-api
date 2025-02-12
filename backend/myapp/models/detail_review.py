@@ -4,8 +4,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class DetailReview(models.Model):
     pos_date = models.DateField()
     
-    # atributo choice para limitar las opciones validas em un campo
-    # este debera contener una lista de tuplas (el primer valor de cada tupla es lo que se guarda em db, 
+    # atributo choice para limitar las opciones validas en un campo,
+    # este debera contener una lista de tuplas (el primer valor de cada tupla es lo que se guarda en db, 
     # y el segundo la opcion que se muestra en el formulario para llenar)
     qualification = models.IntegerField(default=1, choices=[(i, str(i)) for i in range(1, 11)], validators=[MinValueValidator(1), MaxValueValidator(10)])
     

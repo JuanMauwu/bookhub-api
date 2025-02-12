@@ -3,7 +3,6 @@ from rest_framework import status
 from django.urls import reverse
 from myapp.models import Book
 
-
 #TEST GET
 class BookGetAPITest(TestCase): 
     def setUp(self):

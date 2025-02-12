@@ -4,3 +4,4 @@ from .detail_review import DetailReview
 from .label import Label
 from .review import Review
 from .publisher import Publisher
+from .language import Language

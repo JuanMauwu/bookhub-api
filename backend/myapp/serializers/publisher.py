@@ -15,4 +15,3 @@ class PublisherSerializer(serializers.ModelSerializer):
         "email",
         "revenue" 
         ]
-        

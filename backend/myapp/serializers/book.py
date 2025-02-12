@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from myapp.models import Book
 
 class BookSerializer(serializers.ModelSerializer):

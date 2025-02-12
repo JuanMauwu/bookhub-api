@@ -5,11 +5,6 @@ from rest_framework.response import Response
 from myapp.models import Label
 from myapp.serializers import LabelSerializer
 
-"""
-class LabelViewSet(viewsets.ModelViewSet):
-    queryset = Label.objects.all()
-    serializer_class = LabelSerializer
-"""
 
 class LabelListCreateAPIView(generics.ListCreateAPIView):
     queryset = Label.objects.filter(active=True)
@@ -34,14 +29,3 @@ class LabelDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-"""
-class LabelListAPIView(generics.ListAPIView):
-    queryset = Label.objects.filter(active=True)
-    serializer_class = LabelSerializer
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({"values": serializer.data})
-"""

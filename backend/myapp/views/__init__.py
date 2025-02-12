@@ -4,3 +4,4 @@ from .label import LabelListCreateAPIView, LabelDetailAPIView
 from .publisher import PublisherListCreateAPIView, PublisherDetailAPIView
 from .review import ReviewListCreateAPIView, ReviewDetailAPIView
 from .tag import TagListCreateAPIView, TagDetailAPIView
+from .language import LanguageListCreateAPIView, LanguageDetailAPIView

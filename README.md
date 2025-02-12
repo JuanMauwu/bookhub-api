@@ -33,10 +33,10 @@ Abrir la db en terminal y visualizar tablas:
 - docker-compose exec backend python manage.py dbshell
 - .tables (listar todas las tablas en la db)
 - .mode table (para ponerlo en formato bonito)
-- SELECT column FROM nombre de la tabla (ejem: SELECT title FROM book) (ejem: SELECT * FROM book "selecciona todos los campos")
+- SELECT column FROM nombre de la tabla; (ejem: SELECT title FROM book;) (ejem: SELECT * FROM book;) "selecciona todos los campos")
 
 
-Tipos de Campos en Django:
+Tipos de Campos en Django (clases):
     Campos Numéricos:
     - IntegerField
     - FloatField
