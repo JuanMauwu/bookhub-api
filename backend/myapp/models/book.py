@@ -1,9 +1,11 @@
 from django.db import models
+from myapp.models import Language
 
 class Book(models.Model):
     title = models.CharField(max_length=30, unique=True)
     author = models.CharField("Book author", max_length=100)
     summary = models.TextField(max_length=1500, blank=True)
+    language = models.ManyToManyField(Language)
     pos_date = models.DateField()
     active = models.BooleanField(default=True)
     

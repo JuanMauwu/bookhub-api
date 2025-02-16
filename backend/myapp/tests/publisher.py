@@ -379,6 +379,8 @@ class PublisherPutAPITest(TestCase):
             active=True,
         )
         
+        self.publisher1.books.add(self.book1, self.book2)
+        
         self.publisher_put_data = {
             "name": "Publisher",
             "founded": "2000-02-01",
@@ -389,8 +391,6 @@ class PublisherPutAPITest(TestCase):
             "email": "contact@new.com",
             "revenue": "3000000.00"
         }
-        
-        self.publisher1.books.add(self.book1, self.book2)
         
         self.detail_url = reverse("myapp:publisher-detail", kwargs={"id": self.publisher1.id})
         self.response = self.client.put(self.detail_url, self.publisher_put_data, content_type="application/json")
@@ -516,7 +516,7 @@ class PublisherPatchAPITest(TestCase):
         for field in expected_fields:
             self.assertIn(field, data)
             
-        #verificar si el cmapo se modifico
+        #verificar si el campo se modifico
         self.assertEqual(data["name"], self.publisher_patch_data["name"])
         
         #verificar si los campos que no se modificaron quedaron igual
@@ -530,10 +530,9 @@ class PublisherPatchAPITest(TestCase):
             else:
                 self.assertEqual(data[field], getattr(publlisher, field))
                 
-        #comparamos los datos del campo "books"
+        #comparamos las referencias de los books
         actual_books = list(self.publisher1.books.values_list("id", flat=True))
-        
-        self.assertListEqual(actual_books, data["books"])
+        self.assertListEqual(actual_books, self.publisher_patch_data["books"])
         
         #verificar que las claves del campo address existanb en la respuesta
         address_expected_keys = ["street", "city", "country"]
