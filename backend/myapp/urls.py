@@ -29,9 +29,5 @@ urlpatterns = [
     #review
     path('reviews/', views.ReviewListCreateAPIView.as_view(), name='review-list-create'),
     path("review/<str:id>/", views.ReviewDetailAPIView.as_view(), name="review-detail"),
-    
-    #tag
-    path('tags/', views.TagListCreateAPIView.as_view(), name='tag-list-create'),
-    path("tag/<str:id>/", views.TagDetailAPIView.as_view(), name="tag-detail"),
-    
+
 ] 
