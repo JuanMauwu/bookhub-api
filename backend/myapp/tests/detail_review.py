@@ -1,3 +1,4 @@
+from rest_framework.test import APIClient
 from django.test import TestCase
 from rest_framework import status 
 from django.urls import reverse
@@ -6,6 +7,8 @@ from myapp.models import DetailReview
 #TEST GET
 class DetailReviewGetAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.detail_review1 = DetailReview.objects.create(
             pos_date = "2005-05-29",
             qualification = 10,
@@ -64,6 +67,8 @@ class DetailReviewGetAPITest(TestCase):
 #TEST GET DETAIL
 class DetailReviewGetDetailAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.detail_review1 = DetailReview.objects.create(
             pos_date = "2005-05-29",
             qualification = 10,
@@ -119,6 +124,8 @@ class DetailReviewGetDetailAPITest(TestCase):
 #TEST POST
 class DetailReviewPostAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.detail_review_post_data = {
             "pos_date": "2005-05-29",
             "qualification": 10,
@@ -157,7 +164,7 @@ class DetailReviewPostAPITest(TestCase):
             else:
                 self.assertEqual(getattr(detail_review, field), self.detail_review_post_data[field])
     
-    def test_fields_types(self):
+    def test_field_types(self):
         data = self.response.json()
         
         fields_types = {
@@ -175,6 +182,8 @@ class DetailReviewPostAPITest(TestCase):
 #TEST DELETE
 class DetailReviewDeleteAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.detail_review1 = DetailReview.objects.create(
             pos_date = "2005-05-29",
             qualification = 10,
@@ -193,9 +202,11 @@ class DetailReviewDeleteAPITest(TestCase):
         #verificar que el objeto no exista en la db
         self.assertFalse(DetailReview.objects.filter(id=self.detail_review1.id).exists()) 
 
-#TEST PUT (actualizar pero se deben pasar todos los campos)
+#TEST PUT
 class DetailReviewPutAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.detail_review1 = DetailReview.objects.create(
             pos_date = "2005-05-29",
             qualification = 10,
@@ -256,10 +267,12 @@ class DetailReviewPutAPITest(TestCase):
         for field, type in fields_types.items():
             self.assertIsInstance(data[field], type)
 
-#TEST METODO PATCH (actualizar pero solo se pasa el campo a modificar, puede variar dado como esten definidos los campos en el modelo)
+#TEST METODO PATCH 
 class DetailReviewPatchAPITest(TestCase):
     def setUp(self):
-        self.detai_review1 = DetailReview.objects.create(
+        self.client = APIClient()
+        
+        self.detail_review1 = DetailReview.objects.create(
             pos_date = "2005-05-29",
             qualification = 10,
             comments = "Lorem ipsum dolor sit amet",
@@ -272,7 +285,7 @@ class DetailReviewPatchAPITest(TestCase):
             "comments": "Lorem",
         }
         
-        self.detail_url = reverse("myapp:detail-review-detail", kwargs={"id": self.detai_review1.id})
+        self.detail_url = reverse("myapp:detail-review-detail", kwargs={"id": self.detail_review1.id})
         self.response = self.client.patch(self.detail_url, self.detail_review_patch_data, content_type="application/json")
         
     def test_status_code(self):
@@ -292,7 +305,7 @@ class DetailReviewPatchAPITest(TestCase):
         self.assertEqual(data["comments"], self.detail_review_patch_data["comments"])
         
         #verificar si los campos que no se modificaron quedaron igual
-        detail_review = DetailReview.objects.get(id=self.detai_review1.id)
+        detail_review = DetailReview.objects.get(id=self.detail_review1.id)
         
         expected_data = ["id", "pos_date", "qualification","active"]
         

@@ -1,3 +1,4 @@
+from rest_framework.test import APIClient
 from django.test import TestCase
 from rest_framework import status 
 from django.urls import reverse
@@ -6,6 +7,8 @@ from myapp.models import Label
 #TEST GET
 class LabelGetAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.label1 = Label.objects.create(
             name = "Ficción",
             description = "Lorem ipsum dolor sit amet",
@@ -60,6 +63,8 @@ class LabelGetAPITest(TestCase):
 #TEST GET DETAIL
 class LabelGetDetailAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.label1 = Label.objects.create(
             name = "Ficción",
             description = "Lorem ipsum dolor sit amet",
@@ -111,6 +116,7 @@ class LabelGetDetailAPITest(TestCase):
 #TEST POST           
 class LabelPostAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
         self.label_post_data = {
             "name": "Ficción",
             "description": "Lorem ipsum dolor sit amet",
@@ -164,6 +170,8 @@ class LabelPostAPITest(TestCase):
 #TEST DELETE     
 class labelDeleteAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.label1 = Label.objects.create(
             name = "Ficción",
             description = "Lorem ipsum dolor sit amet",
@@ -181,9 +189,11 @@ class labelDeleteAPITest(TestCase):
         #verificar que el objeto no exista en la db
         self.assertFalse(Label.objects.filter(id=self.label1.id).exists())
         
-#TEST PUT (actualizar pero se deben pasar todos los campos)
+#TEST PUT
 class LabelPutAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.label1 = Label.objects.create(
             name = "Ficción",
             description = "Lorem ipsum dolor sit amet",
@@ -237,9 +247,11 @@ class LabelPutAPITest(TestCase):
         for field, type in fields_types.items():
             self.assertIsInstance(data[field], type)
 
-#TEST METODO PATCH (actualizar pero solo se pasa el campo a modificar, puede variar dado como esten definidos los campos en el modelo)
+#TEST METODO PATCH
 class LabelPatchAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.label1 = Label.objects.create(
             name = "Ficción",
             description = "Lorem ipsum dolor sit amet",

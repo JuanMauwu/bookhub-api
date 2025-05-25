@@ -1,3 +1,4 @@
+from rest_framework.test import APIClient
 from django.test import TestCase
 from rest_framework import status 
 from django.urls import reverse
@@ -6,6 +7,8 @@ from myapp.models import Review, Book, Label, DetailReview
 #TEST GET
 class ReviewGetAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         #este modelo tiene tres campos con relaciones de los tres tipos, primero creamos los objetos a relacionar con el modelo principal
         self.book1 = Book.objects.create( 
             title="The Catcher",         
@@ -104,6 +107,8 @@ class ReviewGetAPITest(TestCase):
 #TEST GET DETAIL
 class ReviewGetDetailAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.book1 = Book.objects.create( 
             title="The Catcher",         
             author="J.D. Salinger",
@@ -197,6 +202,8 @@ class ReviewGetDetailAPITest(TestCase):
 #TEST POST
 class ReviewPostAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.book1 = Book.objects.create( 
             title="The Catcher",         
             author="J.D. Salinger",
@@ -306,6 +313,8 @@ class ReviewPostAPITest(TestCase):
 #TEST DELETE 
 class ReviewDeleteAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.book1 = Book.objects.create( 
             title="The Catcher",         
             author="J.D. Salinger",
@@ -359,9 +368,11 @@ class ReviewDeleteAPITest(TestCase):
         self.assertTrue(Book.objects.filter(id=self.book1.id).exists())
         self.assertTrue(DetailReview.objects.filter(id=self.detail_review1.id).exists())
     
-#TEST PUT (actualizar pero se deben pasar todos los campos)
+#TEST PUT 
 class ReviewPutAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.book1 = Book.objects.create( 
             title="The Catcher",         
             author="J.D. Salinger",
@@ -491,9 +502,11 @@ class ReviewPutAPITest(TestCase):
         for field, type in field_types.items():
             self.assertIsInstance(data[field], type)            
         
-#TEST METODO PATCH (actualizar pero solo se pasa el campo a modificar, puede variar dado como esten definidos los campos en el modelo)
+#TEST METODO PATCH 
 class ReviewPatchAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.book1 = Book.objects.create( 
             title="The Catcher",         
             author="J.D. Salinger",

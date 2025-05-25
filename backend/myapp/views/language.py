@@ -11,6 +11,7 @@ from myapp.serializers import LanguageSerializer
 class LanguageListCreateAPIView(generics.ListCreateAPIView):
     queryset = Language.objects.filter(active=True)
     serializer_class = LanguageSerializer
+    #parser_classes = [MultiPartParser, FormParser]
 
 class LanguageDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Language.objects.all()

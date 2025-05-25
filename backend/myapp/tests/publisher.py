@@ -1,3 +1,4 @@
+from rest_framework.test import APIClient
 from django.test import TestCase
 from rest_framework import status 
 from django.urls import reverse
@@ -6,7 +7,9 @@ from decimal import Decimal
 
 #TEST GET
 class PublisherGetAPITest(TestCase):
-    def setUp(self):        
+    def setUp(self):  
+        self.client = APIClient()
+              
         self.publisher1 = Publisher.objects.create(
             name="Example Publisher",
             founded="1990-05-15",
@@ -114,6 +117,8 @@ class PublisherGetAPITest(TestCase):
 #TEST GET DETAIL
 class PublisherGetDetailAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.publisher1 = Publisher.objects.create(
             name="Example Publisher",
             founded="1990-05-15",
@@ -214,6 +219,8 @@ class PublisherGetDetailAPITest(TestCase):
 #TEST POST
 class PublisherPostAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.book1 = Book.objects.create(
             title="The Catcher",
             author="J.D. Salinger",
@@ -306,6 +313,8 @@ class PublisherPostAPITest(TestCase):
 #TEST DELETE 
 class PublisherDeleteAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.publisher1 = Publisher.objects.create(
             name="Example Publisher",
             founded="1990-05-15",
@@ -350,9 +359,11 @@ class PublisherDeleteAPITest(TestCase):
         self.assertTrue(Book.objects.filter(id=self.book1.id).exists())
         self.assertTrue(Book.objects.filter(id=self.book2.id).exists())
         
-#TEST PUT (actualizar pero se deben pasar todos los campos)
+#TEST PUT 
 class PublisherPutAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.publisher1 = Publisher.objects.create(
             name="Example Publisher",
             founded="1990-05-15",
@@ -458,9 +469,11 @@ class PublisherPutAPITest(TestCase):
         for field, type in field_types.items():
             self.assertIsInstance(data[field], type)
             
-#TEST METODO PATCH (actualizar pero solo se pasa el campo a modificar, puede variar dado como esten definidos los campos en el modelo)
+#TEST METODO PATCH
 class PublisherPatchAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.publisher1 = Publisher.objects.create(
             name="Example Publisher",
             founded="1990-05-15",

@@ -29,3 +29,5 @@ class BookAdmin(admin.ModelAdmin):
             for lang in obj.language.all() if lang.flag
         ]
         return format_html(" ".join(flags)) if flags else "-"
+    
+    #recorderis de list comprehension: [ HAGA_ESTO for CADA_ESTO in ESTO if CONDICIÓN ]

@@ -3,4 +3,4 @@ from .detail_review import DetailReviewListCreateAPIView, DetailReviewDetailAPIV
 from .label import LabelListCreateAPIView, LabelDetailAPIView
 from .publisher import PublisherListCreateAPIView, PublisherDetailAPIView
 from .review import ReviewListCreateAPIView, ReviewDetailAPIView
-from .language import *
+from .language import LanguageListCreateAPIView, LanguageDetailAPIView

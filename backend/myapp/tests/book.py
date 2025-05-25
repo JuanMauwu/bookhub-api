@@ -1,3 +1,4 @@
+from rest_framework.test import APIClient
 from django.test import TestCase
 from rest_framework import status 
 from django.urls import reverse
@@ -7,6 +8,8 @@ from myapp.models import Book, Language
 #TEST GET
 class BookGetAPITest(TestCase): 
     def setUp(self):
+        self.client = APIClient()
+        
         self.book1 = Book.objects.create(               #.objects es el manager usado en django para interactuar con la db, permite hacer consultas y operar con los registros de cada modelo propiamente
             title="The Catcher",                        #con el manager podemos usar operaciondes CRUD (Create, Read, Update, Delete) con los modelos. create() es uno de estos metodos
             author="J.D. Salinger",
@@ -23,19 +26,18 @@ class BookGetAPITest(TestCase):
             active=True,
         )
         
-        test_image = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg") #funcion para simular la subida de un archivo en los tests
-        
+  
         language1 = Language.objects.create(
             name = "Español",
             code = "es",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"), #funcion para simular la subida de un archivo en los tests
             active = True
         )
         
         language2 = Language.objects.create(
             name = "Ingglés",
             code = "en",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"),
             active = True
         )
         
@@ -56,13 +58,11 @@ class BookGetAPITest(TestCase):
         #verificar si la data no esta vacia
         self.assertGreater(len(data), 0, "No data")        
         
-        #verificar que los campos requeridos si esten en la respuesta
-        expected_fields = ["id", "title", "author", "summary", "language", "pos_date", "active"]
-        
-        for field in expected_fields:
+        #verificar que los campos requeridos si esten en la respuesta 
+        for field in ["id", "title", "author", "summary", "language", "pos_date", "active"]:
             self.assertIn(field, data[0]) 
          
-        #verificar que los campos requeridos si esten en la respuesta
+        #verificar que los datos de la respuesta correspodan con el objeto creado para la prueba
         expected_fields = ["id", "title", "author", "summary", "pos_date", "active"]
         
         for field in expected_fields:                                    
@@ -119,6 +119,8 @@ class BookGetAPITest(TestCase):
 #TEST GET DETAIL (detalles del Get)
 class BookGetDetailApiTest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         #crear el libro en la db de prueba
         self.book1 = Book.objects.create(
             title="The Catcher",
@@ -128,12 +130,10 @@ class BookGetDetailApiTest(TestCase):
             active=True,            
         )
         
-        test_image = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg")
-        
         language1 = Language.objects.create(
             name = "Español",
             code = "es",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"),
             active = True
         )
         
@@ -202,19 +202,19 @@ class BookGetDetailApiTest(TestCase):
 #TEST POST
 class BookPostAPITest(TestCase):
     def setUp(self):
-        test_image = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg")
+        self.client = APIClient()
         
         self.language1 = Language.objects.create(
             name = "Español",
             code = "es",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"),
             active = True
         )
         
         self.language2 = Language.objects.create(
             name = "Inglés",
             code = "en",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"),
             active = True
         )        
         
@@ -287,12 +287,12 @@ class BookPostAPITest(TestCase):
 #TEST METODO DELETE       
 class BookDeleteAPITest(TestCase):
     def setUp(self):
-        test_image = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg")
+        self.client = APIClient()
         
         language = Language.objects.create(
             name = "Español",
             code = "es",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"),
             active = True
         )
         
@@ -320,19 +320,19 @@ class BookDeleteAPITest(TestCase):
 #METODO PUT (actualizar pero se deben pasar todos los campos)
 class BookPutAPITest(TestCase):
     def setUp(self):
-        test_image = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg")
+        self.client = APIClient()
         
         language1 = Language.objects.create(
             name = "Español",
             code = "es",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"),
             active = True 
         )
         
         language2 = Language.objects.create(
             name = "Inglés",
             code = "en",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"),
             active = True
         )
         
@@ -418,6 +418,8 @@ class BookPutAPITest(TestCase):
 #TEST METODO PATCH (actualizar pero solo se pasa el campo a modificar, puede variar dado como esten definidos los campos en el modelo)
 class BookPatchAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        
         self.book1 = Book.objects.create(
             title="The Catcher",                        
             author="J.D. Salinger",
@@ -425,13 +427,11 @@ class BookPatchAPITest(TestCase):
             pos_date="1951-07-16",
             active=True, 
         )
-        
-        test_image = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg")
-        
+    
         language1 = Language.objects.create(
             name = "Español",
             code = "es",
-            flag = test_image,
+            flag = SimpleUploadedFile("flag.jpg", b"", content_type="image/jpeg"),
             active = True 
         )
         

@@ -1,69 +1,75 @@
 # django-benniger
 
-Comandos para iniciar el proyecto:
+## Comandos para iniciar el proyecto y de docker:
 - Abrir terminal
 - Abrir docker
 - docker compose up backend (inicializa el contenedor)
+- docker ps -a (para ver los contenedores)
 
 
-Abrir sitio administrativo:
+## Abrir sitio administrativo:
 - http://localhost:8000/admin/
 
 
-Hacer migraciones:
-- docker-compose exec backend python manage.py makemigrations myapp
-- docker-compose exec backend python manage.py migrate myapp
+## Hacer migraciones:
+- docker-compose exec "nombre de mi servicio definidp en el yml" python manage.py makemigrations myapp
+mi caso:  docker-compose exec bookhub-api python manage.py makemigrations myapp
+
+- docker-compose exec "nombre de mi servicio definido en el yml" python manage.py migrate myapp
+mi caso: docker-compose exec bookhub-api python manage.py migrate myapp
+o docker-compose exec bookhub-api python manage.py migrate
 
 
-Endpoint o rutas de APIs:
+## Comando para el test:
+- docker compose exec "nombre del servicio" python manage.py test myapp.tests
+mi caso: docker compose exec bookhub-api python manage.py test myapp.tests
+
+
+## Endpoint o rutas de APIs:
 - http://localhost:8000/api/v1/books
 - http://localhost:8000/api/v1/tags
 
 
-Hacer migraciones(despues de crear o modificar un modelo):
-- docker compose exec backend python manage.py makemigrations myapp
-- docker compose exec backend python manage.py migrate myapp
+## Crear super usuario (inicio de proyecto):
+- docker compose exec "nombre del servicio" python manage.py createsuperuser
+mi caso: docker compose exec bookhub-api python manage.py createsuperuser
 
 
-Crear super usuario (inicio de proyecto):
-- docker compose exec backend python manage.py createsuperuser
-
-
-Abrir la db en terminal y visualizar tablas:
+## Abrir la db en terminal y visualizar tablas:
 - docker-compose exec backend python manage.py dbshell
 - .tables (listar todas las tablas en la db)
 - .mode table (para ponerlo en formato bonito)
 - SELECT column FROM nombre de la tabla; (ejem: SELECT title FROM book;) (ejem: SELECT * FROM book;) "selecciona todos los campos")
 
 
-Tipos de Campos en Django (clases):
-    Campos Numéricos:
+## Tipos de Campos en Django (clases):
+- **Campos Numéricos**:
     - IntegerField
     - FloatField
     - DecimalField(max_digits=X, decimal_places=Y)
 
-    Campos de Texto:
+- **Campos de Texto**:
     - CharField(max_length=X)
     - TextField
 
-    Campos de Fecha y Hora:
+- **Campos de Fecha y Hora**:
     - DateField(auto_now=False, auto_now_add=False)
     - TimeField(auto_now=False, auto_now_add=False)
     - DateTimeField(auto_now=False, auto_now_add=False)
 
-    Campos Booleanos:
+- **Campos Booleanos**:
     - BooleanField
 
-    Campos de Relación:
+- **Campos de Relación**:
     - ForeignKey(to, on_delete=models.CASCADE) "Uno a muchos" Elijo uno y Puedo repetir en otro modelo la elección
     - ManyToManyField(to) "Muchos a muchos" Elijo los que quiera y puedo repetir en otro modelo la elección
     - OneToOneField(to, on_delete=models.CASCADE) "Uno a uno" Elijo uno sin repetir 
  
-    Campos de Archivos y Multimedia:
+- **Campos de Archivos y Multimedia**:
     - FileField(upload_to='path/')
     - ImageField(upload_to='path/')
 
-    Campos Misceláneos:
+- **Campos Misceláneos**:
     - EmailField
     - URLField
     - UUIDField
@@ -72,11 +78,7 @@ Tipos de Campos en Django (clases):
     - IPAddressField
     - GenericIPAddressField(protocol='both')
 
-Comando para el test:
-- docker compose exec backend python manage.py test myapp.tests
-
-
-Metodos de asserts (unittest):
+## Metodos de asserts (unittest):
 
 - assertEqual(a, b)
 Verifica que a y b sean iguales.
